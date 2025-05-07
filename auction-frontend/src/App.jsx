@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AuctionDetail from "./pages/AuctionDetail";
 import CreateAuction from "./pages/CreateAuction";
+import MyAuctions from "./pages/Myauctions";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/auction/:id" element={<AuctionDetail />} />
             <Route path="/create-auction" element={<CreateAuction />} />
+            <Route path="/my-auction" element={<MyAuctions />} />
           </Routes>
         </main>
       </div>

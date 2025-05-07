@@ -23,13 +23,19 @@ function Navbar() {
             to="/dashboard"
             className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
           >
-            Dashboard
+            Live Auctions
           </Link>
           <Link
             to="/create-auction"
             className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
           >
             Create Auction
+          </Link>
+          <Link
+            to="/my-auction"
+            className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+          >
+            My Auction
           </Link>
         </div>
 

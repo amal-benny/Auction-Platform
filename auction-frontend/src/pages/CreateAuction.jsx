@@ -5,6 +5,7 @@ function CreateAuction() {
     title: "",
     description: "",
     startingBid: "",
+    startTime: "",
     endTime: "",
     image: null,
   });
@@ -24,14 +25,13 @@ function CreateAuction() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Later we'll send this data to backend using FormData
     console.log("Auction Created:", formData);
     alert("Auction created (mock)");
-    // Clear form
     setFormData({
       title: "",
       description: "",
       startingBid: "",
+      startTime: "",
       endTime: "",
       image: null,
     });
@@ -39,65 +39,118 @@ function CreateAuction() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        Create New Auction
+    <div className="max-w-3xl mx-auto px-6 py-10 bg-gray-50 min-h-screen">
+      <h2 className="text-4xl font-bold text-blue-500 mb-10 text-center">
+        Create a New Auction
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow space-y-4"
+        className="bg-white p-8 rounded-xl shadow-lg space-y-6"
       >
-        <input
-          type="text"
-          name="title"
-          placeholder="Item Title"
-          className="w-full border px-4 py-2 rounded"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Item Description"
-          className="w-full border px-4 py-2 rounded"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="startingBid"
-          placeholder="Starting Bid (₹)"
-          className="w-full border px-4 py-2 rounded"
-          value={formData.startingBid}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="datetime-local"
-          name="endTime"
-          className="w-full border px-4 py-2 rounded"
-          value={formData.endTime}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          className="w-full"
-          onChange={handleChange}
-          required
-        />
-        {preview && (
-          <img
-            src={preview}
-            alt="Preview"
-            className="mt-4 w-full h-64 object-contain rounded"
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Item Title
+          </label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter item title"
+            className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={formData.title}
+            onChange={handleChange}
+            required
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Description
+          </label>
+          <textarea
+            name="description"
+            placeholder="Enter a brief description"
+            className="w-full border border-gray-300 px-4 py-2 rounded-lg resize-none h-28 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Starting Bid (₹)
+          </label>
+          <input
+            type="number"
+            name="startingBid"
+            placeholder="Eg: 1000"
+            className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={formData.startingBid}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Start Time
+            </label>
+            <input
+              type="datetime-local"
+              name="startTime"
+              className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={formData.startTime}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              End Time
+            </label>
+            <input
+              type="datetime-local"
+              name="endTime"
+              className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={formData.endTime}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Upload Image
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-blue-50 file:text-blue-700
+            hover:file:bg-blue-100"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {preview && (
+          <div className="mt-6">
+            <h3 className="text-sm text-gray-600 mb-2 font-medium">Preview:</h3>
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-full h-64 object-contain border border-gray-200 rounded-lg shadow-sm"
+            />
+          </div>
         )}
+
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
         >
           Submit Auction
         </button>
