@@ -46,11 +46,11 @@ function MyAuctions() {
   const getStatusStyle = (status) => {
     switch (status) {
       case "won":
-        return "bg-green-100 text-green-700";
+        return "bg-gradient-to-r from-green-400 to-green-600 text-white animate-pulse";
       case "lost":
-        return "bg-red-100 text-red-700";
+        return "bg-gradient-to-r from-red-400 to-red-600 text-white";
       case "pending":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-gradient-to-r from-yellow-300 to-yellow-500 text-white";
       default:
         return "bg-gray-100 text-gray-700";
     }
@@ -58,41 +58,42 @@ function MyAuctions() {
 
   return (
     <div className="container mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center text-blue-600">
-        My Auctions
+      <h1 className="text-4xl font-extrabold mb-10 text-center text-indigo-600 tracking-wide drop-shadow-sm">
+        🏆 My Auctions
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {auctions.map((auction) => (
           <div
             key={auction.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden transition-all transform hover:scale-102 hover:shadow-md hover:translate-y-1"
+            className="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl border border-gray-100"
           >
             <img
               src={auction.imageUrl}
               alt={auction.title}
-              className="w-full h-60 object-cover rounded-t-xl"
+              className="w-full h-60 object-cover hover:brightness-95 transition-all duration-300"
             />
-            <div className="p-5">
+            <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold text-gray-800">
                   {auction.title}
                 </h2>
                 <span
-                  className={`text-xs px-3 py-1 rounded-full font-medium ${getStatusStyle(
+                  className={`text-xs px-3 py-1 rounded-full font-semibold shadow ${getStatusStyle(
                     auction.status
                   )}`}
                 >
                   {auction.status.toUpperCase()}
                 </span>
               </div>
-              <p className="text-lg font-semibold text-gray-900 mb-3">
-                Current Bid: ₹{auction.currentBid}
+              <p className="text-lg font-bold text-gray-900 mb-4">
+                Current Bid: ₹{auction.currentBid.toLocaleString()}
               </p>
               <Link
                 to={`/auction/${auction.id}`}
-                className="inline-block mt-3 text-blue-600 font-medium hover:text-blue-800 hover:underline transition-colors"
+                className="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
               >
-                View Auction →
+                View Details →
               </Link>
             </div>
           </div>

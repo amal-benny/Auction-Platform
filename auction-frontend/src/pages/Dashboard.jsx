@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 function Dashboard() {
@@ -42,31 +42,45 @@ function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-500">
-        Live Auctions
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-6">
+      <h1 className="text-4xl font-extrabold mb-10 text-center text-blue-600 drop-shadow-md">
+        🔥 Live Auctions
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {auctions.map((auction) => (
           <div
             key={auction.id}
-            className="bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition-all duration-200"
+            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 p-5 flex flex-col"
           >
-            <img
-              src={auction.image}
-              alt={auction.title}
-              className="w-full h-48 object-cover rounded-xl mb-4"
-            />
-            <h2 className="text-xl font-semibold">{auction.title}</h2>
-            <p className="text-gray-600 mb-2">{auction.description}</p>
-            <p className="text-sm text-gray-500">
-              Current Bid:{" "}
-              <span className="font-semibold">{auction.currentBid}</span>
+            <div className="relative">
+              <img
+                src={auction.image}
+                alt={auction.title}
+                className="w-full h-48 object-cover rounded-xl mb-4"
+              />
+              <span className="absolute top-2 right-2 bg-red-100 text-red-600 text-xs font-medium px-2 py-1 rounded-md shadow-sm">
+                Ends: {auction.endTime}
+              </span>
+            </div>
+
+            <h2 className="text-xl font-bold text-gray-800 mb-1">
+              {auction.title}
+            </h2>
+            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+              {auction.description}
             </p>
-            <p className="text-sm text-red-500 mb-4">{auction.endTime}</p>
+
+            <p className="text-sm text-gray-500 mb-4">
+              Current Bid:{" "}
+              <span className="text-lg font-semibold text-green-600">
+                ₹{auction.currentBid}
+              </span>
+            </p>
+
             <Link
               to={`/auction/${auction.id}`}
-              className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              className="mt-auto text-center px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition duration-200"
             >
               View Auction
             </Link>
@@ -76,5 +90,4 @@ function Dashboard() {
     </div>
   );
 }
-
 export default Dashboard;

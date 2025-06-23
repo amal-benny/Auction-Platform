@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AuctionDetail from "./pages/AuctionDetail";
 import CreateAuction from "./pages/CreateAuction";
-import MyAuctions from "./pages/Myauctions";
+import MyAuctions from "./pages/MyAuctions";
 
 function App() {
   return (

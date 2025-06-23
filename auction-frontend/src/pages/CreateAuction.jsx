@@ -23,19 +23,51 @@ function CreateAuction() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Auction Created:", formData);
-    alert("Auction created (mock)");
-    setFormData({
-      title: "",
-      description: "",
-      startingBid: "",
-      startTime: "",
-      endTime: "",
-      image: null,
-    });
-    setPreview(null);
+
+    const form = new FormData();
+    form.append("title", formData.title);
+    form.append("description", formData.description);
+    form.append("starting_bid", formData.startingBid);
+    form.append("start_time", formData.startTime);
+    form.append("end_time", formData.endTime);
+    form.append("image", formData.image);
+
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/auction/create/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: form,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+      alert("Auction created successfully!");
+
+      setFormData({
+        title: "",
+        description: "",
+        startingBid: "",
+        startTime: "",
+        endTime: "",
+        image: null,
+      });
+      setPreview(null);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to create auction");
+    }
   };
 
   return (
